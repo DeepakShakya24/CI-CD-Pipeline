@@ -47,17 +47,14 @@
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
-                                <figure class="image is-50x50">
+                                <figure class="image is-100x100">
                                     {%if icon%}
                                     <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image">
-                                </figure>
-                            </div>
-                                   <div class="row1">
-                                    <div class="col-md-4">
-                                    {%else%}
+                                     {%else%}
                                      <img src="https://images.unsplash.com/photo-1530908295418-a12e326966ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="Image">
                                     {%endif%}
-                                    </div>
+                                </figure>
+                            </div>
                             <div class="media-content">
                                 {%if city and temperature and description and icon%}
                                 <div class="content">
