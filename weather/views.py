@@ -1,20 +1,25 @@
 from django.shortcuts import render
 import urllib.request
+import requests
 import json
 # Create your views here.
 def index(request):
     if request.method == 'POST':
         city = request.POST['city']
-        source = urllib.request.urlopen('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=fd101856268b92f37fcb9280a3235743').read()
+        params = {
+            'access_key': 'a9f8f8ab12c0b6bb34cfda170721af2e',
+            'query': city
+        }
+        source = requests.get('http://api.weatherstack.com/current', params)
 
         # converting JSON data to a dictionary
-        r = json.loads(source)
+        r = source.json()
         city_weather={
-                'city':str(city),
-                'country':str(r['sys']['country']),
-                'temperature':str(r['main']['temp']),
-                'description':str(r['weather'][0]['description']),
-                'icon':r['weather'][0]['icon']
+            'city': str(city),
+            'country': str(r['location']['country']),
+            'temperature': str(r['current']['temperature']),
+            'description': str(r['current']['weather_descriptions'][0]),
+            'icon': r['current']['weather_icons'][0]
         }
 
         print(city_weather)
