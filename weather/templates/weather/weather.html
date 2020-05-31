@@ -1,80 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
 
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Weather App</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Satisfy" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+      <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
 </head>
-
 <body>
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    What's the weather like?
-                </h1>
+        <div class='jumbotron jumbotron-fluid'>
+            <div class='container'>
+              <h1 class="display-4">How's About Weather!</h1>
             </div>
         </div>
-    </section>
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                <input class="input" type="text" name="city" placeholder="City Name">
-                            </div>
-                            <div class="control">
-                                <button class="button is-info">
-                                    Search City
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
-                    <div class="box">
-                        <article class="media">
-                            <div class="media-left">
-                                <figure class="image is-100x100">
-                                    {%if icon%}
-                                    <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image">
-                                     {%else%}
-                                     <img src="https://images.unsplash.com/photo-1530908295418-a12e326966ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="Image">
-                                    {%endif%}
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                {%if city and temperature and description and icon%}
-                                <div class="content">
-                                    <p>
-                                        <span class="title">{{city}}</span>
-                                        <br>
-                                        <span class="subtitle">{{temperature}}</span>
-                                        <br> {{description}}
-                                    </p>
-                                </div>
-                                {%endif%}
-                            </div>
-                        </article>
+         {%if city and country and temperature and description and icon%}
+        <div class="container-fluid bg">
+             <link rel="stylesheet" href="{%static 'css/page2.css'%}">
+            <div>
+                <form class="example" method="POST" style="margin:auto;max-width:600px">
+                    {%csrf_token%}
+                    <input type="text" placeholder="Enter your city name" name="city">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                <div class="content row">
+                    <div>
+                        <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image">
+                    </div>
+                        <div class='container col-sm-2'>
+                            <p>
+                                <h1 class="title">City:{{city}},{{country}}</h1>
+                                <br>
+                                <span class="subtitle">Temperature:{{temperature}}&#8451</span>
+                                <br>Description:{{description}}
+                            </p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <footer class="footer">
-    </footer>
+        {%else%}
+<div class="container-fluid bg">
+    <link rel="stylesheet" href="{%static 'css/page1.css'%}">
+            <div>
+                <form class="example" method="POST" style="margin:auto;max-width:600px">
+                    {%csrf_token%}
+                    <input type="text" placeholder="Enter your city name" name="city">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+</div>
+     {%endif%}
 </body>
-
 </html>
