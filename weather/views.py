@@ -17,6 +17,7 @@ def index(request):
         city_weather={
             'city': str(city),
             'country': str(r['location']['country']),
+            'time': str(r['location']["localtime"]),
             'temperature': str(r['current']['temperature']),
             'description': str(r['current']['weather_descriptions'][0]),
             'icon': r['current']['weather_icons'][0]

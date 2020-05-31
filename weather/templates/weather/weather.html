@@ -23,7 +23,7 @@
               <h1 class="display-4">How's About Weather!</h1>
             </div>
         </div>
-         {%if city and country and temperature and description and icon%}
+         {%if city and country and temperature and description and time and icon%}
         <div class="container-fluid bg">
              <link rel="stylesheet" href="{%static 'css/page2.css'%}">
             <div>
@@ -40,8 +40,10 @@
                             <p>
                                 <h1 class="title">City:{{city}},{{country}}</h1>
                                 <br>
-                                <span class="subtitle">Temperature:{{temperature}}&#8451</span>
-                                <br>Description:{{description}}
+                            <span class="subtitle"><strong>Time:</strong>{{time}}</span>
+                                <br>
+                                <span class="subtitle"><strong>Temperature:</strong>{{temperature}}&#8451</span>
+                                <br><strong>Description:</strong>{{description}}
                             </p>
                     </div>
                 </div>
